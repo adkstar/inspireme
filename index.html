@@ -4,11 +4,32 @@
     <meta charset="UTF-8">
     <title>Inspire me</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/main.js"></script>
 </head>
 <body>
     <div class="overlay">
-        <h1>Hello, Abdi Daraje</h1>
+
+        <div class="top">
+            <div class="left">
+                <div>
+                    Interest: <span class="interest-text"></span>
+                </div>
+                <div>
+                    Photo by: <a class="photoby" href="#" target="_blank"></a>
+                </div>
+            </div>
+            <div class="right">
+                <div class="date"></div>
+            </div>
+        </div>
+        <h1 class="time"></h1>
+        <h2 class="greeting"></h2>
+        <input class="user-name" type="text">
+        <input class="interest" type="text">
+        <div class="change-btn">
+            Choose a new interest
+        </div>
     </div>
 </body>
 </html>
