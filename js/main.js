@@ -79,6 +79,61 @@ $(document).ready(function(){
   });
 
 });
+
+
+$(window).on('load', function() {
+
+  var username = getCookie('username');
+
+  if (username) {
+
+    $('.greeting').css('display', 'inline-block');
+    $('.user-name').css('display', 'none');
+    var interest = getCookie('interest');
+
+    if (interest) {
+
+      $('.interest').css('display', 'none');
+      $('.interest-text').html(interest);
+      $('.greeting').html(`Hello <span class="stored-name">${username}</span>.`);
+
+      newRandomImage(interest);
+
+
+    } else {
+
+      $('.greeting').html(`What's your interst?`);
+      $('.interest').css('display', 'inline-block');
+
+    }
+  }
+});
+
+function newRandomImage(keyword){
+  if(!ACCESS_KEY){
+    alert("Please update your access key");
+    return;
+  }
+  var url = `https://api.unsplash.com/photos/random?query=${keyword}&orientation=landscape&client_id=${ACCESS_KEY}`;
+  $.get(url,function(data){
+    window.pictures = data
+    var picture = data
+
+    var picture_url = picture.urls.raw;
+    var photo_by_name = picture.user.name;
+    var photo_by_url = picture.user.links.html;
+    setCookie("picture",picture_url,0.5);
+    setCookie("photo-by-name",photo_by_name,0.5);
+    setCookie("photo-by-url",photo_by_url,0.5);
+    $('.interest-text').html(keyword);
+    $('.photoby').html(photo_by_name);
+    $('.photoby').attr('href',photo_by_url);
+    $('body').css('background-image',`url(${picture_url})`);
+    $('.change-btn').css('display','block');
+  });
+}
+
+
 function newimage(keyword){
   if(!ACCESS_KEY){
     alert("Please update your access key");
